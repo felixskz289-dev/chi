@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>汉语乐园 · Повторение YCT 2 + Профессии</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fdf6e3; --paper2:#fffdf6; --ink:#3a2e22; --ink2:#7a6a58;
+  --red:#d64541; --yellow:#ffd94d; --yellow2:#ffe89a; --green:#5a9e6f; --teal:#4a8b8b;
+  --shadow:0 10px 30px rgba(90,70,40,.18);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(rgba(150,120,70,.10) 1px,transparent 1px);background-size:22px 22px}
+.zh{font-family:'Noto Serif SC',serif}
+/* HERO */
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 20px;position:relative}
+.hero .big{font-size:clamp(60px,12vw,150px);font-weight:900;line-height:1.1;
+  background:linear-gradient(135deg,var(--red),#e8912d);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(4px 6px 0 rgba(214,69,65,.15))}
+.hero h1{font-size:clamp(24px,4vw,44px);font-weight:800;margin-top:8px}
+.hero p{color:var(--ink2);max-width:560px;margin:14px auto 26px;font-size:17px}
+.seal{display:inline-block;background:var(--red);color:#fff;font-family:'Noto Serif SC';font-weight:700;
+  padding:8px 14px;border-radius:8px;letter-spacing:2px;transform:rotate(-3deg);box-shadow:var(--shadow);font-size:18px}
+.btn{display:inline-block;border:none;cursor:pointer;font-family:'Manrope';font-weight:800;font-size:17px;
+  padding:15px 34px;border-radius:999px;color:var(--ink);background:var(--yellow);
+  box-shadow:0 6px 0 #d9a91f, var(--shadow);transition:transform .15s, box-shadow .15s;text-decoration:none}
+.btn:hover{transform:translateY(-3px)}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #d9a91f}
+.btn.ghost{background:var(--paper2);box-shadow:0 6px 0 #d8cbb2, var(--shadow)}
+.stamp{position:absolute;font-family:'Noto Serif SC';font-weight:700;color:rgba(214,69,65,.14);user-select:none;pointer-events:none}
+/* NAV */
+nav{position:sticky;top:0;z-index:50;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;
+  background:rgba(253,246,227,.92);backdrop-filter:blur(10px);padding:12px 10px;border-bottom:2px dashed rgba(150,120,70,.3)}
+nav a{font-weight:700;font-size:14px;color:var(--ink2);text-decoration:none;padding:8px 14px;border-radius:999px;transition:.2s}
+nav a:hover{background:var(--yellow2);color:var(--ink)}
+/* SECTIONS */
+section{max-width:1100px;margin:0 auto;padding:70px 20px}
+h2.sec{font-size:clamp(26px,4vw,38px);font-weight:800;display:flex;align-items:center;gap:14px;margin-bottom:8px}
+h2.sec .tag{font-family:'Noto Serif SC';background:var(--red);color:#fff;font-size:16px;padding:4px 12px;border-radius:8px;transform:rotate(-2deg)}
+.sub{color:var(--ink2);margin-bottom:30px;font-size:16px}
+/* NOTE CARDS */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:18px}
+.note{position:relative;background:var(--yellow2);border-radius:4px 18px 4px 18px;padding:20px 14px 16px;text-align:center;
+  box-shadow:var(--shadow);cursor:pointer;transition:transform .25s;min-height:150px;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.note::before{content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(-2deg);
+  width:70px;height:20px;background:rgba(255,255,255,.55);border:1px solid rgba(0,0,0,.06);border-radius:2px}
+.note:hover{transform:translateY(-6px) rotate(-1deg)}
+.note .h{font-family:'Noto Serif SC';font-weight:900;font-size:40px;line-height:1.15}
+.note .p{color:#8a6d1a;font-weight:600;font-size:15px}
+.note .r{font-size:15px;font-weight:700}
+.note .face{backface-visibility:hidden}
+.note .back{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:8px;
+  background:var(--paper2);border-radius:4px 18px 4px 18px;opacity:0;transition:opacity .3s;padding:14px}
+.note.flipped .back{opacity:1}
+.note .back .h{font-size:44px;color:var(--red)}
+.note .speak{position:absolute;bottom:8px;right:10px;border:none;background:none;font-size:18px;cursor:pointer;opacity:.7}
+.note .speak:hover{opacity:1;transform:scale(1.2)}
+.hint{font-size:13px;color:var(--ink2);margin-top:14px;font-style:italic}
+/* GAMES */
+.game-box{background:var(--paper2);border:2px dashed rgba(150,120,70,.35);border-radius:24px;padding:30px;box-shadow:var(--shadow)}
+.scorebar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px}
+.pill{background:var(--yellow);padding:6px 16px;border-radius:999px;font-weight:800}
+.q{font-size:22px;font-weight:800;text-align:center;margin:10px 0 24px}
+.q .zh{color:var(--red);font-size:30px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.opt{background:var(--yellow2);border:none;border-radius:14px;padding:18px;font-size:22px;font-family:'Noto Serif SC';font-weight:700;
+  cursor:pointer;box-shadow:0 4px 0 #d9c26a;transition:.15s;color:var(--ink)}
+.opt small{display:block;font-family:'Manrope';font-size:13px;font-weight:600;color:var(--ink2);margin-top:4px}
+.opt:hover{transform:translateY(-2px)}
+.opt.correct{background:#bfe6c6;box-shadow:0 4px 0 #6fae7f}
+.opt.wrong{background:#f5c1bd;box-shadow:0 4px 0 #d0766f}
+.feedback{text-align:center;min-height:34px;margin-top:18px;font-weight:800;font-size:18px}
+.feedback.good{color:var(--green)} .feedback.bad{color:var(--red)}
+/* QUIZ */
+#quizOpts .opt{font-family:'Manrope';font-size:18px}
+/* PROFESSIONS */
+.prof-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:20px;margin-bottom:34px}
+.prof{background:var(--paper2);border-radius:20px;padding:24px 14px;text-align:center;box-shadow:var(--shadow);transition:transform .25s;border-top:5px solid var(--red)}
+.prof:nth-child(2){border-top-color:var(--teal)} .prof:nth-child(3){border-top-color:#e8912d}
+.prof:nth-child(4){border-top-color:var(--green)} .prof:nth-child(5){border-top-color:#8a6fbf} .prof:nth-child(6){border-top-color:#c2507a}
+.prof:hover{transform:translateY(-6px) scale(1.02)}
+.prof .emoji{font-size:52px}
+.prof .h{font-family:'Noto Serif SC';font-weight:900;font-size:36px;margin:6px 0 2px}
+.prof .p{color:var(--ink2);font-weight:600}
+.prof .r{font-weight:800;font-size:17px;margin-top:4px}
+.prof button{margin-top:10px;border:none;background:var(--yellow);border-radius:999px;padding:7px 16px;font-weight:800;cursor:pointer;font-family:'Manrope'}
+.phrase{background:var(--yellow2);border-radius:16px;padding:16px 22px;margin:10px 0;display:flex;align-items:center;gap:16px;flex-wrap:wrap;box-shadow:var(--shadow)}
+.phrase .zh{font-size:26px;font-weight:700}
+.phrase .py{color:#8a6d1a;font-weight:600}
+.phrase .ru{font-weight:700}
+/* SENTENCE BUILDER */
+.chips{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:20px 0}
+.chip{background:var(--yellow2);border:2px solid #e0c96a;border-radius:12px;padding:12px 18px;font-family:'Noto Serif SC';font-size:24px;font-weight:700;cursor:pointer;transition:.15s;box-shadow:0 3px 0 #d9c26a}
+.chip:hover{transform:translateY(-3px)}
+.chip.used{opacity:.25;pointer-events:none;box-shadow:none}
+.slot-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;min-height:64px;padding:14px;border:2px dashed rgba(150,120,70,.4);border-radius:16px;background:#fff}
+.slot{background:var(--paper2);border-radius:12px;padding:10px 16px;font-family:'Noto Serif SC';font-size:24px;font-weight:700;box-shadow:var(--shadow);cursor:pointer}
+.slot:hover{background:#f5c1bd}
+/* FOOTER */
+footer{text-align:center;padding:40px 20px;color:var(--ink2);font-size:14px}
+footer .zh{font-size:20px;color:var(--red);font-weight:700}
+@media(max-width:600px){.note .h{font-size:32px}.opt{font-size:19px}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="stamp" style="top:8%;left:6%;font-size:110px;">汉字</span>
+  <span class="stamp" style="bottom:12%;right:5%;font-size:90px;transform:rotate(12deg">复习</span>
+  <span class="stamp" style="top:20%;right:12%;font-size:70px;transform:rotate(-8deg">加油</span>
+  <span class="seal zh">第二课 · 职业</span>
+  <div class="big zh">汉语乐园</div>
+  <h1>Повторение YCT 2 + новая тема «Профессии»</h1>
+  <p>Все иероглифы с пяти страниц учебника — карточки с озвучкой, игры, викторина — и новые слова о профессиях: 厨师, 医生 и другие.</p>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center">
+    <a class="btn" href="#cards">Начать повторение 🀄</a>
+    <a class="btn ghost" href="#prof">К профессиям 👨‍🍳</a>
+  </div>
+</div>
+
+<nav>
+  <a href="#cards">🃏 Карточки</a>
+  <a href="#find">🔍 Найди иероглиф</a>
+  <a href="#quiz">✅ Викторина</a>
+  <a href="#prof">👨‍🍳 Профессии</a>
+  <a href="#builder">🧩 Предложения</a>
+</nav>
+
+<!-- FLASHCARDS -->
+<section id="cards">
+  <h2 class="sec"><span class="tag zh">复习</span>Повторение иероглифов</h2>
+  <p class="sub">Нажми на карточку, чтобы перевернуть. 🔊 — прослушать произношение.</p>
+  <div id="cardGroups"></div>
+  <p class="hint">Подсказка: желтая лента сверху — как стикеры из учебника. Карточки переворачиваются по клику.</p>
+</section>
+
+<!-- FIND GAME -->
+<section id="find">
+  <h2 class="sec"><span class="tag zh">游戏</span>Игра «Найди иероглиф»</h2>
+  <p class="sub">По пиньиню и переводу выбери правильный иероглиф. Как игра «Touch the words» из учебника!</p>
+  <div class="game-box">
+    <div class="scorebar"><span class="pill">⭐ Очки: <span id="findScore">0</span></span><span class="pill">🔥 Серия: <span id="findStreak">0</span></span></div>
+    <div class="q" id="findQ"></div>
+    <div class="opts" id="findOpts"></div>
+    <div class="feedback" id="findFb"></div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz">
+  <h2 class="sec"><span class="tag zh">测验</span>Викторина</h2>
+  <p class="sub">10 вопросов на всё: перевод, пиньинь, иероглифы и профессии.</p>
+  <div class="game-box">
+    <div class="scorebar"><span class="pill">Вопрос <span id="quizN">1</span>/10</span><span class="pill">✅ <span id="quizScore">0</span></span></div>
+    <div class="q" id="quizQ"></div>
+    <div class="opts" id="quizOpts"></div>
+    <div class="feedback" id="quizFb"></div>
+    <div style="text-align:center;margin-top:16px"><button class="btn" id="quizNext" style="display:none">Дальше →</button></div>
+  </div>
+</section>
+
+<!-- PROFESSIONS -->
+<section id="prof">
+  <h2 class="sec"><span class="tag zh">职业</span>Новая тема: Профессии 职业</h2>
+  <p class="sub">Послушай, повтори, выучи. Потренируйся в конструкторе предложений ниже.</p>
+  <div class="prof-grid" id="profGrid"></div>
+  <h3 style="margin-bottom:14px;font-size:22px">🗣️ Полезные фразы</h3>
+  <div class="phrase"><span class="zh">我是厨师。</span><span class="py">Wǒ shì chúshī.</span><span class="ru">Я — повар.</span></div>
+  <div class="phrase"><span class="zh">我爸爸是医生。</span><span class="py">Wǒ bàba shì yīshēng.</span><span class="ru">Мой папа — врач.</span></div>
+  <div class="phrase"><span class="zh">她不是老师，她是护士。</span><span class="py">Tā bú shì lǎoshī, tā shì hùshi.</span><span class="ru">Она не учитель, она — медсестра.</span></div>
+  <div class="phrase"><span class="zh">你长大以后想做什么？</span><span class="py">Nǐ zhǎng dà yǐhòu xiǎng zuò shénme?</span><span class="ru">Кем ты хочешь стать, когда вырастешь?</span></div>
+  <div class="phrase"><span class="zh">我想当司机。</span><span class="py">Wǒ xiǎng dāng sījī.</span><span class="ru">Я хочу стать водителем.</span></div>
+</section>
+
+<!-- SENTENCE BUILDER -->
+<section id="builder">
+  <h2 class="sec"><span class="tag zh">句子</span>Конструктор предложений</h2>
+  <p class="sub">Собери предложение из слов. Нажми на слово в рамке, чтобы убрать его обратно.</p>
+  <div class="game-box">
+    <div class="scorebar"><span class="pill">Предложение <span id="sbN">1</span>/<span id="sbTotal"></span></span><span class="pill">✅ <span id="sbScore">0</span></span></div>
+    <div class="q">Перевод: <b id="sbRu"></b></div>
+    <div class="slot-row" id="sbSlots"></div>
+    <div class="chips" id="sbChips"></div>
+    <div style="text-align:center">
+      <button class="btn" id="sbCheck">Проверить ✔</button>
+      <button class="btn ghost" id="sbReset">Сброс ↺</button>
+    </div>
+    <div class="feedback" id="sbFb"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="zh">好好学习，天天向上！</div>
+  <p>Учи усердно — и каждый день станешь лучше!<br>Интерактивный урок по материалам YCT 2 Standard Course · 2026</p>
+</footer>
+
+<script>
+const GROUPS = [
+ {title:"🥟 Еда и умения", words:[
+  ["包子","bāozi","паровая булочка"],["医生","yīshēng","врач"],["厨师","chūshī","повар"],
+  ["会","huì","уметь / can"],["做","zuò","делать"],["真","zhēn","действительно"],["好吃","hǎochī","вкусно"]]},
+ {title:"🎨 Цвета и счётные слова", words:[
+  ["红色","hóngsè","красный"],["黄色","huángsè","жёлтый"],["绿色","lǜsè","зелёный"],
+  ["只","zhī","сч. слово (животные)"],["名字","míngzi","имя"],["漂亮","piàoliang","красивый"],
+  ["颜色","yánsè","цвет"],["两","liǎng","два"],["本","běn","сч. слово (книги)"]]},
+ {title:"🙏 Вежливость", words:[
+  ["可以","kěyǐ","можно"],["坐","zuò","сидеть"],["请","qǐng","пожалуйста"],
+  ["不客气","bú kèqi","не за что"],["不要","bú yào","не надо"],["说话","shuōhuà","говорить"],
+  ["对不起","duìbuqǐ","извините"],["没关系","méi guānxi","ничего страшного"]]},
+ {title:"🛏️ Комната", words:[
+  ["床","chuáng","кровать"],["房间","fángjiān","комната"],["电视","diànshì","телевизор"],
+  ["桌子","zhuōzi","стол"],["椅子","yǐzi","стул"],["铅笔","qiānbǐ","карандаш"],
+  ["书包","shūbāo","портфель"],["里面","lǐmiàn","внутри"],["上边","shàngbian","наверху"],["矮","ǎi","низкий"]]},
+ {title:"⏰ Время", words:[
+  ["起床","qǐchuáng","вставать"],["睡觉","shuìjiào","ложиться спать"],["早上","zǎoshang","утро"],
+  ["晚上","wǎnshang","вечер"],["到","dào","до, до чего-то"],["呢","ne","частица"],["要","yào","хотеть"]]}
+];
+const PROFS = [
+ ["厨师","chūshī","повар","👨‍🍳"],["医生","yīshēng","врач","👨‍⚕️"],["护士","hùshi","медсестра","👩‍⚕️"],
+ ["老师","lǎoshī","учитель","👨‍🏫"],["学生","xuésheng","ученик","🧑‍🎓"],["司机","sījī","водитель","🚗"]
+];
+function speak(t){ try{ const u=new SpeechSynthesisUtterance(t); u.lang='zh-CN'; u.rate=.85; speechSynthesis.cancel(); speechSynthesis.speak(u);}catch(e){} }
+
+/* FLASHCARDS */
+const cg=document.getElementById('cardGroups');
+GROUPS.forEach(g=>{
+  const h=document.createElement('h3');h.style.cssText='margin:34px 0 16px;font-size:21px';h.textContent=g.title;cg.appendChild(h);
+  const gr=document.createElement('div');gr.className='grid';
+  g.words.forEach(w=>{
+    const n=document.createElement('div');n.className='note';
+    n.innerHTML=`<div class="face"><div class="h zh">${w[0]}</div><div class="p">${w[1]}</div><div class="r">${w[2]}</div></div>
+      <div class="back"><div class="h zh">${w[0]}</div><div class="p" style="font-size:20px">${w[1]}</div><div class="r" style="font-size:17px">${w[2]}</div></div>
+      <button class="speak" title="Озвучить">🔊</button>`;
+    n.addEventListener('click',e=>{ if(e.target.classList.contains('speak')){speak(w[0]);} else n.classList.toggle('flipped'); });
+    gr.appendChild(n);
+  });
+  cg.appendChild(gr);
+});
+
+/* ALL WORDS POOL */
+const ALL=[].concat(...GROUPS.map(g=>g.words),PROFS.map(p=>[p[0],p[1],p[2]]));
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>[...a].sort(()=>Math.random()-.5);
+
+/* FIND GAME */
+let fScore=0,fStreak=0;
+function newFind(){
+  const w=rnd(ALL);
+  const opts=shuffle([w[0],...shuffle(ALL.filter(x=>x[0]!==w[0])).slice(0,3).map(x=>x[0])]);
+  document.getElementById('findQ').innerHTML=`Какой иероглиф читается как <b style="color:var(--teal)">${w[1]}</b> и значит «${w[2]}»?`;
+  const box=document.getElementById('findOpts');box.innerHTML='';
+  document.getElementById('findFb').textContent='';
+  opts.forEach(o=>{
+    const b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=()=>{
+      if(o===w[0]){b.classList.add('correct');fScore++;fStreak++;document.getElementById('findFb').innerHTML='<span class="good">✅ Правильно! '+w[0]+' — '+w[2]+'</span>';speak(w[0]);setTimeout(newFind,1100);}
+      else{b.classList.add('wrong');fStreak=0;document.getElementById('findFb').innerHTML='<span class="bad">❌ Не совсем. Правильный ответ — '+w[0]+'</span>';speak(w[0]);[...box.children].forEach(c=>{if(c.textContent===w[0])c.classList.add('correct')});setTimeout(newFind,1600);}
+      document.getElementById('findScore').textContent=fScore;
+      document.getElementById('findStreak').textContent=fStreak;
+      [...box.children].forEach(c=>c.disabled=true);
+    };
+    box.appendChild(b);
+  });
+}
+newFind();
+
+/* QUIZ */
+let qn=0,qScore=0,qLock=false;
+function quizQ(){
+  const w=rnd(ALL); const type=Math.floor(Math.random()*3);
+  let q,answers,correct;
+  if(type===0){q=`Что значит иероглиф <span class="zh">${w[0]}</span> (${w[1]})?`;correct=w[2];answers=shuffle([correct,...shuffle(ALL.filter(x=>x[2]!==correct)).slice(0,3).map(x=>x[2])]);}
+  else if(type===1){q=`Как пишется слово «${w[2]}»?`;correct=w[0];answers=shuffle([correct,...shuffle(ALL.filter(x=>x[0]!==correct)).slice(0,3).map(x=>x[0])]);}
+  else{q=`Выбери верный пиньинь для <span class="zh">${w[0]}</span> («${w[2]}»)`;correct=w[1];answers=shuffle([correct,...shuffle(ALL.filter(x=>x[1]!==correct)).slice(0,3).map(x=>x[1])]);}
+  document.getElementById('quizQ').innerHTML=q;
+  const box=document.getElementById('quizOpts');box.innerHTML='';document.getElementById('quizFb').textContent='';
+  document.getElementById('quizN').textContent=qn+1;
+  document.getElementById('quizNext').style.display='none';qLock=false;
+  answers.forEach(a=>{
+    const b=document.createElement('button');b.className='opt';b.innerHTML=type===1?`<span class="zh" style="font-size:24px">${a}</span>`:`${a}`;
+    b.onclick=()=>{
+      if(qLock)return;qLock=true;
+      if(a===correct){b.classList.add('correct');qScore++;document.getElementById('quizFb').innerHTML='<span class="good">✅ Верно!</span>';}
+      else{b.classList.add('wrong');document.getElementById('quizFb').innerHTML=`<span class="bad">❌ Правильно: ${correct}</span>`;[...box.children].forEach(c=>{if(c.textContent===correct||c.querySelector('.zh')?.textContent===correct)c.classList.add('correct')});}
+      speak(w[0]);[...box.children].forEach(c=>c.disabled=true);
+      document.getElementById('quizScore').textContent=qScore;
+      document.getElementById('quizNext').style.display='inline-block';
+    };
+    box.appendChild(b);
+  });
+}
+document.getElementById('quizNext').onclick=()=>{
+  qn++;
+  if(qn>=10){
+    document.getElementById('quizQ').innerHTML=`<span class="zh" style="font-size:52px">${qScore>=8?'太棒了!':qScore>=5?'不错!':'加油!'}</span><br><br>Итог: <b>${qScore} / 10</b> ${qScore>=8?'— отличный результат! 🏆':qScore>=5?'— хорошо, но стоит повторить! 💪':'— повтори карточки и попробуй снова! 📚'}`;
+    document.getElementById('quizOpts').innerHTML='';document.getElementById('quizFb').textContent='';
+    document.getElementById('quizNext').textContent='Ещё раз ↺';
+    document.getElementById('quizNext').onclick=()=>{qn=0;qScore=0;document.getElementById('quizNext').textContent='Дальше →';document.getElementById('quizNext').onclick=arguments.callee;quizQ();};
+    qn=-1;
+  } else quizQ();
+};
+quizQ();
+
+/* PROFESSIONS */
+const pg=document.getElementById('profGrid');
+PROFS.forEach(p=>{
+  const d=document.createElement('div');d.className='prof';
+  d.innerHTML=`<div class="emoji">${p[3]}</div><div class="h zh">${p[0]}</div><div class="p">${p[1]}</div><div class="r">${p[2]}</div><button>🔊 Послушать</button>`;
+  d.querySelector('button').onclick=()=>speak(p[0]);
+  pg.appendChild(d);
+});
+
+/* SENTENCE BUILDER */
+const SENTS=[
+ ["我","是","厨师","。","Я — повар."],
+ ["他","爸爸","是","医生","。","Его папа — врач."],
+ ["她","不是","老师",",","她","是","护士","。","Она не учитель, она медсестра."],
+ ["你","要","什么","?","Что ты хочешь?"],
+ ["我","会","做饭",",","但是","不会","做","包子","。","Я умею готовить, но не умею делать баоцзы."]
+];
+let sbI=0,sbScore=0;
+function loadSB(){
+  const s=SENTS[sbI]; const zh=s.slice(0,-1), ru=s[s.length-1];
+  document.getElementById('sbRu').textContent=ru;
+  document.getElementById('sbN').textContent=sbI+1;
+  document.getElementById('sbFb').textContent='';
+  const chips=document.getElementById('sbChips');chips.innerHTML='';
+  shuffle(zh).forEach(w=>{
+    const c=document.createElement('div');c.className='chip zh';c.textContent=w;
+    c.onclick=()=>{ c.classList.add('used');
+      const sl=document.createElement('div');sl.className='slot zh';sl.textContent=w;
+      sl.onclick=()=>{sl.remove();c.classList.remove('used');};
+      document.getElementById('sbSlots').appendChild(sl); };
+    chips.appendChild(c);
+  });
+  document.getElementById('sbSlots').innerHTML='';
+}
+document.getElementById('sbTotal').textContent=SENTS.length;
+document.getElementById('sbCheck').onclick=()=>{
+  const cur=[...document.querySelectorAll('#sbSlots .slot')].map(x=>x.textContent).join('');
+  const right=SENTS[sbI].slice(0,-1).join('');
+  const fb=document.getElementById('sbFb');
+  if(cur===right){ sbScore++; document.getElementById('sbScore').textContent=sbScore;
+    fb.innerHTML='<span class="good">✅ Правильно! '+right+'</span>'; speak(right);
+    setTimeout(()=>{ sbI=(sbI+1)%SENTS.length; loadSB(); },1500);
+  } else { fb.innerHTML='<span class="bad">❌ Пока не так. Подумай ещё!</span>'; }
+};
+document.getElementById('sbReset').onclick=loadSB;
+loadSB();
+</script>
+</body>
+</html>
